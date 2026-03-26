@@ -8,6 +8,7 @@ public class CreateObject : MonoBehaviour
     public GameObject prefab;
     public float spawnDistance = 5f;
 
+    //Function used to create the magnifying glass to analyze the clues
     public void Spawn()
     {
 

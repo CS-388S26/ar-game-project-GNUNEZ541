@@ -25,24 +25,26 @@ public class InvestigateClue : MonoBehaviour
 
     void Update()
     {
+        //For detecting input
         if (Input.touchCount > 0)
         {
             RaycastHit hit;
 
             rend.material.color = Color.green;
 
+            //Throw a raycast to find a clue
             if (Physics.Raycast(transform.position, targetCamera.transform.forward, out hit, rayDistance))
             {
                 rend.material.color = Color.blue;
 
-                if (hit.collider.CompareTag("Clue"))
+                if (hit.collider.CompareTag("Clue")) //If is a clue fire an event
                 {
                     OnClueHit?.Invoke(hit.collider.name);
                 }
             }
 
         }
-        else
+        else //No target found
         {
             rend.material.color = Color.red;
         }

@@ -23,10 +23,12 @@ public class FootStepManager : MonoBehaviour
     }
     
 
+    //Helper function to show the staged progression pattern
     void HandleClueCompleted(int index)
     {
         if (index < 0 || index >= foot_children.Length) return;
 
+        //Set active only the next clue footsteps
         foreach (Transform t in foot_children)
         {
             t.gameObject.SetActive(false);

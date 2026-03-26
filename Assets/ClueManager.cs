@@ -28,6 +28,7 @@ public class ClueManager : MonoBehaviour
 
     void Start()
     {
+        //Save necessary information to show clue progress
         children = new Transform[transform.childCount];
         timers = new float[children.Length];
         texts = new TMP_Text[children.Length];
@@ -41,6 +42,7 @@ public class ClueManager : MonoBehaviour
 
             TMP_Text[] allTexts = children[i].GetComponentsInChildren<TMP_Text>();
 
+            //To show the percentages
             foreach (TMP_Text t in allTexts)
             {
                 if (t.gameObject.name == "Percentage")
@@ -55,16 +57,19 @@ public class ClueManager : MonoBehaviour
 
     void Update()
     {
+        //If there is a clue being investigated currently
         if (current_focused != -1)
         {
             timers[current_focused] += Time.deltaTime;
 
+            //Update the progress text
             float percent = Mathf.Clamp01(timers[current_focused] / focus_time);
             int percentInt = Mathf.RoundToInt(percent * 100);
 
             if (texts[current_focused] != null)
                 texts[current_focused].text = percentInt + "%";
 
+            //If it reaches 100% then activate staged progression for the next clue
             if (timers[current_focused] >= focus_time)
             {
                 Renderer rend = children[current_focused].GetComponent<Renderer>();
@@ -84,7 +89,7 @@ public class ClueManager : MonoBehaviour
         }
     }
 
-
+    //To update the progress depending on the clue
     void HandleClueProgress(string clue_name)
     {
         switch (clue_name)
